@@ -9,6 +9,7 @@ students = []
 
 
 def create_student(fname,lname):
+    is_stud_created = False
     # student properties
     student = {
         "student_fname": fname,
@@ -18,19 +19,19 @@ def create_student(fname,lname):
 
     # to add a student to the students list
     students.append(student)
+    is_stud_created = True
+    if is_stud_created == False:
+        raise ValueError
 
 # list to store the number of classes
-
-
 classes = []
 # A function to create class profile
-
-
 def create_class(name, capacity):
     # class name should be unique
+    is_created = False
     for classs in classes:
         if classs["class_name"] == name:
-            raise("class name should be unique")
+            raise ValueError("class name should be unique")
 
 
 
@@ -45,6 +46,11 @@ def create_class(name, capacity):
 
     # to add a class in the classes list
     classes.append(classs)
+    is_created = True
+
+    if is_created == False:
+        raise ValueError
+
 
 #to find a class using its id
 def find_class_by_ID(class_id):
@@ -54,6 +60,8 @@ def find_class_by_ID(class_id):
         if classs["class_id"] == class_id:
             class_ = classs
             is_found = True
+            if is_found == False:
+                raise ValueError ("the class_id does not excist")
             break
     return class_,is_found
 
@@ -65,7 +73,7 @@ def classs_delete(class_id):
     # deletes the class whose class ID has been passed
     class_,is_found = find_class_by_ID(class_id)
     if not is_found:
-        raise("class matching id not found")
+        raise ValueError("class matching id not found")
     classes.remove(class_)
     is_delete = True
 
@@ -91,7 +99,7 @@ def student_delete(student_id):
     # deletes the student whose student_id has been passed
     student_,is_student_found = find_student_by_ID(student_id)
     if not is_student_found:
-        raise("student matching student id not found")
+        raise ValueError("student matching student id not found")
     #deletes the student matching student id
     students.remove(student_)
     # checks if the student has been deleted
@@ -121,7 +129,7 @@ def start_log(class_id):
     # starts a class
     class_,is_found = find_class_by_ID(class_id)
     if not is_found:
-        raise("class matching id not found")
+        raise ValueError("class matching id not found")
 
     class_["start_time"] = datetime.now()
     is_started = True
