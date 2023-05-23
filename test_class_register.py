@@ -33,6 +33,16 @@ class TestClassRegister(unittest.TestCase):
         if is_found == False:
             self.assertRaises (ValueError)
 
+    # happy path test for delete class 
+    def happy_path_test_for_delete_class(self):
+        is_deleted = False
+        class_register.create_student("Carlos","nkatha")
+        stud8 = class_register.students[-1]
+        class_register.classs_delete(stud8["class_id"])
+        is_deleted = True
+        if is_deleted == False:
+            self.assertRaises (ValueError)
+            
 
 if __name__ == '__main__':
     unittest.main()
